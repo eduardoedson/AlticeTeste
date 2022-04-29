@@ -1,0 +1,26 @@
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  box-sizing: border-box;
+	font-family: 'Roboto', sans-serif;
+}
+
+body {
+  background: rgb(12,44,65);
+  background: linear-gradient(0deg, rgba(12,44,65,1) 0%, rgba(64,74,50,1) 35%, rgba(103,97,40,1) 100%); 
+}
+
+.logo-img {
+  margin: 20px
+}
+
+@media only screen and (max-width: 360px) { 
+  .titulo {
+    margin-bottom: 25px !important;
+  }
+
+  .stepper {
+    display: none !important;
+  }
+}
