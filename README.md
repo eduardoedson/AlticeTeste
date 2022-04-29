@@ -1,0 +1,3 @@
+- frontend: https://altice-frontend.herokuapp.com/
+- backend: https://altice-backend.herokuapp.com/
+- visualizar cadastros: https://altice-frontend.herokuapp.com/cadastros
