@@ -1,35 +1,41 @@
-import * as React from 'react';
-import CssBaseline from '@mui/material/CssBaseline';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
-import Toolbar from '@mui/material/Toolbar';
+import CssBaseline from '@mui/material/CssBaseline';
+import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
-import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
-import Button from '@mui/material/Button';
-import Link from '@mui/material/Link';
-import Typography from '@mui/material/Typography';
+import Stepper from '@mui/material/Stepper';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import * as React from 'react';
+import Logo from '../Assets/Images/logo_meo_preto.png';
 import First from '../Components/Form/Steps/First';
 import Second from '../Components/Form/Steps/Second';
 import Third from '../Components/Form/Steps/Third';
-import Logo from '../Assets/Images/logo_meo_preto.png';
-import { useNome } from '../Contexts/First/Nome'
-import { useEmail } from '../Contexts/First/Email'
-import { useTelefone } from '../Contexts/First/Telefone'
-import { useRua } from '../Contexts/First/Rua'
-import { useComplemento } from '../Contexts/First/Complemento'
-import { usePorta } from '../Contexts/First/Porta'
-import { useCodigoPostal } from '../Contexts/First/CodigoPostal'
-import { useCidade } from '../Contexts/First/Cidade'
-import { useNomeOperadora } from '../Contexts/Second/NomeOperadora'
-import { useQualidade } from '../Contexts/Second/Qualidade'
-import { useValor } from '../Contexts/Second/Valor'
-import { useVelocidade } from '../Contexts/Second/Velocidade'
-import { useOpiniao } from '../Contexts/Third/Opiniao'
-import Api from '../Services/Api'
+import { useErrorCidade } from '../Contexts/Errors/ErrorCidade';
+import { useErrorCodigoPostal } from '../Contexts/Errors/ErrorCodigoPostal';
+import { useErrorEmail } from '../Contexts/Errors/ErrorEmail';
+import { useErrorNome } from '../Contexts/Errors/ErrorNome';
+import { useErrorPorta } from '../Contexts/Errors/ErrorPorta';
+import { useErrorRua } from '../Contexts/Errors/ErrorRua';
+import { useCidade } from '../Contexts/First/Cidade';
+import { useCodigoPostal } from '../Contexts/First/CodigoPostal';
+import { useComplemento } from '../Contexts/First/Complemento';
+import { useEmail } from '../Contexts/First/Email';
+import { useNome } from '../Contexts/First/Nome';
+import { usePorta } from '../Contexts/First/Porta';
+import { useRua } from '../Contexts/First/Rua';
+import { useTelefone } from '../Contexts/First/Telefone';
+import { useNomeOperadora } from '../Contexts/Second/NomeOperadora';
+import { useQualidade } from '../Contexts/Second/Qualidade';
+import { useValor } from '../Contexts/Second/Valor';
+import { useVelocidade } from '../Contexts/Second/Velocidade';
+import { useOpiniao } from '../Contexts/Third/Opiniao';
+import Api from '../Services/Api';
 
 function Tip() {
   return (
@@ -92,14 +98,56 @@ export default function Checkout() {
   const [velocidade] = useVelocidade();
   const [opiniao] = useOpiniao();
 
+  const [, setErrorCodigoPostal] = useErrorCodigoPostal();
+  const [, setErrorCidade] = useErrorCidade();
+  const [, setErrorEmail] = useErrorEmail();
+  const [, setErrorNome] = useErrorNome();
+  const [, setErrorPorta] = useErrorPorta();
+  const [, setErrorRua] = useErrorRua();
+  
   const validarForm = () => {
     if(activeStep === 0) {
-      if(nome.length === 0 || email.length === 0 || !/\S+@\S+\.\S+/.test(email) ||
-        rua.length === 0 || porta.length === 0 || codigoPostal.length === 0 ||
-        cidade.length === 0 || /[a-zA-Z]/.test(telefone)) {
-          window.alert('Por favor, preencha o formulário corretamente antes de prosseguir.')
-          return false
-        }
+      if (nome.length === 0) {
+        setErrorNome(true)
+        return false
+      } else {
+        setErrorNome(false)
+      }
+
+      if (email.length === 0 || !/\S+@\S+\.\S+/.test(email)) {
+        setErrorEmail(true)
+        return false
+      } else {
+        setErrorEmail(false)
+      }
+
+      if (rua.length === 0) {
+        setErrorRua(true)
+        return false
+      } else {
+        setErrorRua(false)
+      }
+
+      if (porta.length === 0) {
+        setErrorPorta(true)
+        return false
+      } else {
+        setErrorPorta(false)
+      }
+
+      if (codigoPostal.length === 0) {
+        setErrorCodigoPostal(true)
+        return false
+      } else {
+        setErrorCodigoPostal(false)
+      }
+
+      if (cidade.length === 0) {
+        setErrorCidade(true)
+        return false
+      } else {
+        setErrorCidade(false)
+      }
     }
     return true
   }

@@ -14,6 +14,12 @@ import { useComplemento } from '../../../Contexts/First/Complemento'
 import { useCodigoPostal } from '../../../Contexts/First/CodigoPostal'
 import { useCidade } from '../../../Contexts/First/Cidade'
 import Alert from '@mui/material/Alert';
+import { useErrorCidade } from '../../../Contexts/Errors/ErrorCidade'
+import { useErrorCodigoPostal } from '../../../Contexts/Errors/ErrorCodigoPostal'
+import { useErrorEmail } from '../../../Contexts/Errors/ErrorEmail'
+import { useErrorNome } from '../../../Contexts/Errors/ErrorNome'
+import { useErrorPorta } from '../../../Contexts/Errors/ErrorPorta'
+import { useErrorRua } from '../../../Contexts/Errors/ErrorRua'
 
 export default function First() {
   const [nome, setNome] = useNome();
@@ -25,6 +31,13 @@ export default function First() {
   const [codigoPostal, setCodigoPostal] = useCodigoPostal();
   const [cidade, setCidade] = useCidade();
 
+  const [errorCidade] = useErrorCidade();
+  const [errorCodigoPostal] = useErrorCodigoPostal();
+  const [errorEmail] = useErrorEmail();
+  const [errorNome] = useErrorNome();
+  const [errorPorta] = useErrorPorta();
+  const [errorRua] = useErrorRua();
+
   return (
     <React.Fragment>
       <Grid container spacing={3}>
@@ -35,7 +48,7 @@ export default function First() {
             name="nome"
             label="Nome Completo"
             fullWidth
-            error={nome.length === 0 ? true : false}
+            error={errorNome}
             onChange={(e) => setNome(e.target.value)}
             value={nome}
             InputProps={{
@@ -46,9 +59,7 @@ export default function First() {
               ),
             }}
           />
-          {nome.length === 0 ? 
-          <Alert severity="error" style={{ marginTop: 10 }}>Seu nome não pode ficar vazio!</Alert> 
-          : null}
+          {errorNome ? <Alert severity="error" style={{ marginTop: 10 }}>Insira o seu nome</Alert> : null}
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
@@ -59,7 +70,7 @@ export default function First() {
             fullWidth
             onChange={(e) => setEmail(e.target.value)}
             value={email}
-            error={/\S+@\S+\.\S+/.test(email) ? false : true}
+            error={errorEmail}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -68,9 +79,7 @@ export default function First() {
               ),
             }}
           />
-          {email.length === 0 || !/\S+@\S+\.\S+/.test(email) ? 
-          <Alert severity="error" style={{ marginTop: 10 }}>Você precisa fornecer um e-mail válido!</Alert> 
-          : null}
+          {errorEmail ? <Alert severity="error" style={{ marginTop: 10 }}>E-mail válido</Alert> : null}
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
@@ -80,7 +89,7 @@ export default function First() {
             fullWidth
             onChange={(e) => setTelefone(e.target.value)}
             value={telefone}
-            error={/[a-zA-Z]/.test(telefone) ? true : false}
+            error={/[a-zA-Z]/.test(telefone)}
             inputProps={{
               maxLength: 9
             }}
@@ -105,11 +114,9 @@ export default function First() {
             fullWidth
             onChange={(e) => setRua(e.target.value)}
             value={rua}
-            error={rua.length === 0 ? true : false}
+            error={errorRua}
           />
-          {rua.length === 0 ? 
-          <Alert severity="error" style={{ marginTop: 10 }}>Sua rua não pode ficar vazia!</Alert> 
-          : null}
+          {errorRua ? <Alert severity="error" style={{ marginTop: 10 }}>Indique o nome da rua!</Alert> : null}
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
@@ -120,11 +127,9 @@ export default function First() {
             fullWidth
             onChange={(e) => setPorta(e.target.value)}
             value={porta}
-            error={porta.length === 0 ? true : false}
+            error={errorPorta}
           />
-          {porta.length === 0 ? 
-          <Alert severity="error" style={{ marginTop: 10 }}>Seu Nº Edifício/Porta não pode ficar vazio!</Alert> 
-          : null}
+          {errorPorta ? <Alert severity="error" style={{ marginTop: 10 }}>Indique o Nº da Porta!</Alert> : null}
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
@@ -145,11 +150,12 @@ export default function First() {
             fullWidth
             onChange={(e) => setCodigoPostal(e.target.value)}
             value={codigoPostal}
-            error={codigoPostal.length === 0 ? true : false}
+            error={errorCodigoPostal}
+            inputProps={{
+              maxLength: 8
+            }}
           />
-          {codigoPostal.length === 0 ? 
-          <Alert severity="error" style={{ marginTop: 10 }}>Seu código postal não pode ficar vazio!</Alert> 
-          : null}
+          {errorCodigoPostal ? <Alert severity="error" style={{ marginTop: 10 }}>Indique o código postal!</Alert> : null}
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
@@ -160,11 +166,9 @@ export default function First() {
             fullWidth
             onChange={(e) => setCidade(e.target.value)}
             value={cidade}
-            error={cidade.length === 0 ? true : false}
+            error={errorCidade}
           />
-          {cidade.length === 0 ? 
-          <Alert severity="error" style={{ marginTop: 10 }}>Sua cidade não pode ficar vazia!</Alert> 
-          : null}
+          {errorCidade ? <Alert severity="error" style={{ marginTop: 10 }}>Indique a cidade!</Alert> : null}
         </Grid>
       </Grid>
     </React.Fragment>

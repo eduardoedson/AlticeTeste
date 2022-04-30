@@ -12,8 +12,20 @@ import { ValorProvider } from './Second/Valor';
 import { QualidadeProvider } from './Second/Qualidade';
 import { VelocidadeProvider } from './Second/Velocidade';
 import { OpiniaoProvider } from './Third/Opiniao';
+import { ErrorCidadeProvider } from './Errors/ErrorCidade';
+import { ErrorCodigoPostalProvider } from './Errors/ErrorCodigoPostal';
+import { ErrorEmailProvider } from './Errors/ErrorEmail';
+import { ErrorNomeProvider } from './Errors/ErrorNome';
+import { ErrorPortaProvider } from './Errors/ErrorPorta';
+import { ErrorRuaProvider } from './Errors/ErrorRua';
 
 const providers = [
+  ErrorCidadeProvider,
+  ErrorCodigoPostalProvider,
+  ErrorEmailProvider,
+  ErrorNomeProvider,
+  ErrorPortaProvider,
+  ErrorRuaProvider,
   CidadeProvider,
   CodigoPostalProvider,
   ComplementoProvider,
