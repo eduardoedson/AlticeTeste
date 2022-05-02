@@ -16,6 +16,7 @@ import Logo from '../Assets/Images/logo_meo_preto.png';
 import First from '../Components/Form/Steps/First';
 import Second from '../Components/Form/Steps/Second';
 import Third from '../Components/Form/Steps/Third';
+import { useErrorTelefone } from '../Contexts/Errors/ErrorTelefone';
 import { useErrorCidade } from '../Contexts/Errors/ErrorCidade';
 import { useErrorCodigoPostal } from '../Contexts/Errors/ErrorCodigoPostal';
 import { useErrorEmail } from '../Contexts/Errors/ErrorEmail';
@@ -104,6 +105,7 @@ export default function Checkout() {
   const [, setErrorNome] = useErrorNome();
   const [, setErrorPorta] = useErrorPorta();
   const [, setErrorRua] = useErrorRua();
+  const [, setErrorTelefone] = useErrorRua();
   
   const validarForm = () => {
     if(activeStep === 0) {
@@ -147,6 +149,12 @@ export default function Checkout() {
         return false
       } else {
         setErrorCidade(false)
+      }
+
+      if(/[a-zA-Z]/.test(telefone) || telefone.length < 9) {
+        setErrorTelefone(true)
+      } else {
+        setErrorTelefone(false)
       }
     }
     return true

@@ -18,8 +18,10 @@ import { ErrorEmailProvider } from './Errors/ErrorEmail';
 import { ErrorNomeProvider } from './Errors/ErrorNome';
 import { ErrorPortaProvider } from './Errors/ErrorPorta';
 import { ErrorRuaProvider } from './Errors/ErrorRua';
+import { ErrorTelefoneProvider } from './Errors/ErrorTelefone';
 
 const providers = [
+  ErrorTelefoneProvider,
   ErrorCidadeProvider,
   ErrorCodigoPostalProvider,
   ErrorEmailProvider,

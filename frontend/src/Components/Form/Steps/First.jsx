@@ -79,7 +79,7 @@ export default function First() {
               ),
             }}
           />
-          {errorEmail ? <Alert severity="error" style={{ marginTop: 10 }}>E-mail válido</Alert> : null}
+          {errorEmail ? <Alert severity="error" style={{ marginTop: 10 }}>E-mail inválido</Alert> : null}
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
@@ -89,7 +89,7 @@ export default function First() {
             fullWidth
             onChange={(e) => setTelefone(e.target.value)}
             value={telefone}
-            error={/[a-zA-Z]/.test(telefone)}
+            error={/[a-zA-Z]/.test(telefone) || telefone.length < 9}
             inputProps={{
               maxLength: 9
             }}
@@ -102,7 +102,7 @@ export default function First() {
             }}
           />
           {/[a-zA-Z]/.test(telefone) ? 
-          <Alert severity="error" style={{ marginTop: 10 }}>Utilize somente números no campo Telemóvel!</Alert> 
+          <Alert severity="error" style={{ marginTop: 10 }}>O campo deve ter 9 digitos numéricos!</Alert> 
           : null}
         </Grid>
         <Grid item xs={12}>
