@@ -105,7 +105,7 @@ export default function Checkout() {
   const [, setErrorNome] = useErrorNome();
   const [, setErrorPorta] = useErrorPorta();
   const [, setErrorRua] = useErrorRua();
-  const [, setErrorTelefone] = useErrorRua();
+  const [, setErrorTelefone] = useErrorTelefone();
   
   const validarForm = () => {
     if(activeStep === 0) {
@@ -121,6 +121,13 @@ export default function Checkout() {
         return false
       } else {
         setErrorEmail(false)
+      }
+
+      if(/[a-zA-Z]/.test(telefone) || telefone.length < 9) {
+        setErrorTelefone(true)
+        return false
+      } else {
+        setErrorTelefone(false)
       }
 
       if (rua.length === 0) {
@@ -149,12 +156,6 @@ export default function Checkout() {
         return false
       } else {
         setErrorCidade(false)
-      }
-
-      if(/[a-zA-Z]/.test(telefone) || telefone.length < 9) {
-        setErrorTelefone(true)
-      } else {
-        setErrorTelefone(false)
       }
     }
     return true

@@ -20,6 +20,7 @@ import { useErrorEmail } from '../../../Contexts/Errors/ErrorEmail'
 import { useErrorNome } from '../../../Contexts/Errors/ErrorNome'
 import { useErrorPorta } from '../../../Contexts/Errors/ErrorPorta'
 import { useErrorRua } from '../../../Contexts/Errors/ErrorRua'
+import { useErrorTelefone } from '../../../Contexts/Errors/ErrorTelefone'
 
 export default function First() {
   const [nome, setNome] = useNome();
@@ -37,6 +38,7 @@ export default function First() {
   const [errorNome] = useErrorNome();
   const [errorPorta] = useErrorPorta();
   const [errorRua] = useErrorRua();
+  const [errorTelefone] = useErrorTelefone();
 
   return (
     <React.Fragment>
@@ -89,7 +91,7 @@ export default function First() {
             fullWidth
             onChange={(e) => setTelefone(e.target.value)}
             value={telefone}
-            error={/[a-zA-Z]/.test(telefone) || telefone.length < 9}
+            error={errorTelefone}
             inputProps={{
               maxLength: 9
             }}
@@ -101,7 +103,7 @@ export default function First() {
               ),
             }}
           />
-          {/[a-zA-Z]/.test(telefone) ? 
+          {errorTelefone ? 
           <Alert severity="error" style={{ marginTop: 10 }}>O campo deve ter 9 digitos numéricos!</Alert> 
           : null}
         </Grid>
